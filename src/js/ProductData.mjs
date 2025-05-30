@@ -1,3 +1,4 @@
+//export th path to get the information of the products
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
