@@ -19,4 +19,6 @@ async function addToCartHandler(e) {
   addProductToCart(product);
 }
 
-document.getElementById("addToCart").addEventListener("click", addToCartHandler);
+document
+  .getElementById("addToCart")
+  .addEventListener("click", addToCartHandler);
