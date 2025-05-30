@@ -179,6 +179,16 @@ button {
   background-color: #fda150;
   border-radius: 25px;
 }
+/*cart total styles*/
+.cart-footer-hide {
+  display: none;
+}
+.cart-total {
+  margin-right: 11rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: end;
+}
 
 /* Styles for product lists */
 .product-card {
