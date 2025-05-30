@@ -39,3 +39,14 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function cartCounter(){
+  const cartItems = getLocalStorage("so-cart") || [];
+  let count = 0;
+  if(cartItems.length > 0){
+    cartItems.forEach(item => count++);
+    document.querySelector(".cartCounter").style.display = "block";
+    document.querySelector(".cartCounter").innerHTML = count;
+  }
+  
+}

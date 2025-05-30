@@ -168,6 +168,18 @@ button {
   color: var(--dark-grey);
 }
 
+/*cart counter styles*/
+.cartCounter {
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 45%;
+  padding: 1px 6px;
+  font-size: 1.1rem;
+  background-color: #fda150;
+  border-radius: 25px;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
