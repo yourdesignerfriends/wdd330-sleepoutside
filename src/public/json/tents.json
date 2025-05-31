@@ -133,5 +133,34 @@
     },
     "ListPrice": 69.99,
     "FinalPrice": 69.99
+  },
+  {
+    "Id": "990XX",
+    "Brand": {
+      "Name": "REI"
+    },
+    "Name": "REI Trail Dome Tent - 2-Person, 3-Season",
+    "NameWithoutBrand": "Trail Dome Tent - 2-Person, 3-Season",
+    "Image": "/images/tents/trail-dome.jpg",
+    "FinalPrice": 159.99,
+    "Colors": [
+      { "ColorName": "Green" }
+    ],
+    "DescriptionHtmlSimple": "<p>Lightweight and easy to pitch. A great choice for backpackers.</p>"
+  },
+  {
+    "Id": "991YY",
+    "Brand": {
+      "Name": "Big Agnes"
+    },
+    "Name": "Big Agnes Copper Spur HV UL2 - 2-Person, 3-Season",
+    "NameWithoutBrand": "Copper Spur HV UL2 - 2-Person, 3-Season",
+    "Image": "/images/tents/copper-spur.jpg",
+    "FinalPrice": 399.95,
+    "Colors": [
+      { "ColorName": "Orange" }
+    ],
+    "DescriptionHtmlSimple": "<p>Ultralight tent ideal for long-distance hikes with premium features.</p>"
   }
+  
 ]
