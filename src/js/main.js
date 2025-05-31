@@ -8,3 +8,10 @@ const producList = new ProducList("tents", dataSource, element);
 producList.init();
 
 cartCounter();
+
+const closeBtn = document.getElementById("close-alert");
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    document.getElementById("site-alert").style.display = "none";
+  });
+}
