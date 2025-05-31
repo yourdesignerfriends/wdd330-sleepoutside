@@ -29,7 +29,7 @@ function getCartTotal() {
   const cartItems = getLocalStorage("so-cart") || [];
   let total = 0;
   if (cartItems.length > 0) {
-    cartItems.forEach((item) => total += item.FinalPrice);
+    cartItems.forEach((item) => (total += item.FinalPrice));
     document.querySelector(".cart-footer-hide").style.display = "block";
     document.querySelector(".cart-total").innerHTML = `Total: ${total}`;
   }

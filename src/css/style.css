@@ -213,6 +213,11 @@ button {
   font-size: 1em;
 }
 
+.product-card__price {
+  text-align: end;
+  font-weight: 600;
+}
+
 /* End product list card */
 
 .product-detail {

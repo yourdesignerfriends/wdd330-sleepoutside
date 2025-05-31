@@ -43,9 +43,15 @@ function productDetailsTemplate(product) {
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById('productPrice').textContent = product.FinalPrice;
+  document.getElementById('productRetailPrice').textContent = `Suggested Retail Price: ${product.SuggestedRetailPrice.toFixed(2)}`;
+  document.getElementById('discount').textContent = `Discount: ${makeDiscount(product.SuggestedRetailPrice, product.FinalPrice).toFixed(2)}`
+  document.getElementById('productPrice').textContent = `Final Price: ${product.FinalPrice}`;
+  
   document.getElementById('productColor').textContent = product.Colors[0].ColorName;
   document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
 
   document.getElementById('addToCart').dataset.id = product.Id;
+}
+function makeDiscount(retailPrice, finalPrice){
+    return retailPrice - finalPrice
 }
