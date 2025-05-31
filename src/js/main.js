@@ -1,6 +1,11 @@
+import Alert from "./Alert.js";
+
 import { cartCounter } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProducList from "./ProductList.mjs";
+
+const alert = new Alert("/json/alerts.json");
+alert.showAlerts();
 
 const dataSource = new ProductData("tents");
 const element = document.querySelector(".product-list");
@@ -9,9 +14,4 @@ producList.init();
 
 cartCounter();
 
-const closeBtn = document.getElementById("close-alert");
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
-    document.getElementById("site-alert").style.display = "none";
-  });
-}
+
