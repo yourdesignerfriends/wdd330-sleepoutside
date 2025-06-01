@@ -292,3 +292,13 @@ button {
   text-align: center;
 }
 
+footer {
+  font-size: var(--small-font);
+  padding: 1em;
+  text-align: center;
+  color: var(--accent1);
+  border-top: 1px solid var(--accent1);
+  margin-top: 1rem;
+}
+
+
