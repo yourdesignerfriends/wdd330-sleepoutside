@@ -32,27 +32,29 @@ function getCartTotal() {
   if (cartItems.length > 0) {
     cartItems.forEach((item) => (total += item.FinalPrice));
     document.querySelector(".cart-footer-hide").style.display = "block";
-    document.querySelector(".cart-total").innerHTML = `Total: ${total.toFixed(2)}`;
-  }
-  else{
+    document.querySelector(".cart-total").innerHTML =
+      `Total: ${total.toFixed(2)}`;
+  } else {
     document.querySelector(".cart-footer-hide").style.display = "none";
   }
 }
-function setEraser(){
+function setEraser() {
   const cartItems = getLocalStorage("so-cart") || [];
-  cartItems.forEach(product => {
-  document.getElementById(product.Id).addEventListener("click",() => eraseProduct(product))
-  })
+  cartItems.forEach((product) => {
+    document
+      .getElementById(product.Id)
+      .addEventListener("click", () => eraseProduct(product));
+  });
 }
 
-function eraseProduct(item){
-  let newCart = []
+function eraseProduct(item) {
+  let newCart = [];
   const cartItems = getLocalStorage("so-cart") || [];
-  cartItems.forEach(product => {
-    if (product.Id !== item.Id){
-      newCart.push(product)
+  cartItems.forEach((product) => {
+    if (product.Id !== item.Id) {
+      newCart.push(product);
     }
-  })
+  });
   setLocalStorage("so-cart", newCart);
 
   cartCounter();

@@ -12,5 +12,3 @@ const producList = new ProductList("tents", dataSource, element);
 producList.init();
 
 cartCounter();
-
-

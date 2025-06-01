@@ -48,5 +48,8 @@ export function cartCounter(){
     document.querySelector(".cartCounter").style.display = "block";
     document.querySelector(".cartCounter").innerHTML = count;
   }
+  else{
+    document.querySelector(".cartCounter").style.display = "none";
+  }
   
 }
