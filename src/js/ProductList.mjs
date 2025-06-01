@@ -29,7 +29,7 @@ function productCardTemplate(product) {
 }
 
 // AD- Class responsible for managing the product list on the page
-export default class ProducList {
+export default class ProductList {
   constructor(category, datasSource, listElement) {
     this.category = category;
     this.datasSource = datasSource;

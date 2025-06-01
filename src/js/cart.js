@@ -1,9 +1,10 @@
-import { getLocalStorage, cartCounter } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, cartCounter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; //     || [] added
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  getCartTotal();
 }
 
 function cartItemTemplate(item) {
@@ -18,7 +19,7 @@ function cartItemTemplate(item) {
     <h2 class='card__name'>${item.Name}</h2>
   </a>
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: 1</p>
+  <p class='cart-card__quantity'>qty: 1 <spam id="${item.Id}">&#x274C</spam></p>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
 </li>`;
 
@@ -31,10 +32,34 @@ function getCartTotal() {
   if (cartItems.length > 0) {
     cartItems.forEach((item) => (total += item.FinalPrice));
     document.querySelector(".cart-footer-hide").style.display = "block";
-    document.querySelector(".cart-total").innerHTML = `Total: ${total}`;
+    document.querySelector(".cart-total").innerHTML = `Total: ${total.toFixed(2)}`;
   }
+  else{
+    document.querySelector(".cart-footer-hide").style.display = "none";
+  }
+}
+function setEraser(){
+  const cartItems = getLocalStorage("so-cart") || [];
+  cartItems.forEach(product => {
+  document.getElementById(product.Id).addEventListener("click",() => eraseProduct(product))
+  })
+}
+
+function eraseProduct(item){
+  let newCart = []
+  const cartItems = getLocalStorage("so-cart") || [];
+  cartItems.forEach(product => {
+    if (product.Id !== item.Id){
+      newCart.push(product)
+    }
+  })
+  setLocalStorage("so-cart", newCart);
+
+  cartCounter();
+  renderCartContents();
+  setEraser();
 }
 
 renderCartContents();
 cartCounter();
-getCartTotal();
+setEraser();
