@@ -6,7 +6,7 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
   getCartTotal();
 }
-
+// AD- // AD- I make the "X" detectable in JavaScript and associate the item with its ID
 function cartItemTemplate(item) {
   const newItem = `<li class='cart-card divider'>
   <a href='#' class='cart-card__image'>
@@ -19,7 +19,9 @@ function cartItemTemplate(item) {
     <h2 class='card__name'>${item.Name}</h2>
   </a>
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: 1 <spam id="${item.Id}">&#x274C</spam></p>
+  <p class='cart-card__quantity'>
+    <span class="qty">qty: 1</span> <span class="remove-item" data-id="${item.Id}">X</span>
+  </p>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
 </li>`;
 
@@ -38,28 +40,24 @@ function getCartTotal() {
     document.querySelector(".cart-footer-hide").style.display = "none";
   }
 }
+// AD- This ensures that each item in the cart can be properly deleted.
 function setEraser() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  cartItems.forEach((product) => {
-    document
-      .getElementById(product.Id)
-      .addEventListener("click", () => eraseProduct(product));
+  document.querySelectorAll(".remove-item").forEach(button => {
+    button.addEventListener("click", (event) => {
+      const productId = event.target.dataset.id;
+      eraseProduct(productId);
+    });
   });
 }
+// AD- Removes a specific product from the cart and updates the interface to reflect the change.
+function eraseProduct(productId) {
+  let cart = getLocalStorage("so-cart") || [];  
+  cart = cart.filter(item => item.Id !== productId);  
+  setLocalStorage("so-cart", cart);  
 
-function eraseProduct(item) {
-  let newCart = [];
-  const cartItems = getLocalStorage("so-cart") || [];
-  cartItems.forEach((product) => {
-    if (product.Id !== item.Id) {
-      newCart.push(product);
-    }
-  });
-  setLocalStorage("so-cart", newCart);
-
-  cartCounter();
-  renderCartContents();
-  setEraser();
+  cartCounter();  
+  renderCartContents();  
+  setEraser();  
 }
 
 renderCartContents();
