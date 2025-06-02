@@ -300,7 +300,7 @@ footer {
   border-top: 1px solid var(--accent1);
   margin-top: 1rem;
 }
-/* AD-Clase para aplicar el descuento */
+/* AD- Clase para aplicar el descuento */
 .discount-badge {
   background-color: var(--tertiary-color);
   color: white;
@@ -309,5 +309,35 @@ footer {
   font-weight: bold;
   border-radius: 5px;
   display: inline-block;
+  margin-left: 10px;
+}
+/* AD- Added styles for the remove item class to improve visibility */
+.remove-item {
+  font-size: large;
+  color: red;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.remove-item:hover {
+  color: darkred;
+  transform: scale(1.2);
+}
+.cart-card__quantity {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.quantity {
+  display: inline-block;
+  text-align: left;
+}
+.remove-item {
   margin-left: 10px;
 }
