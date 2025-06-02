@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, cartCounter } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, cartCounter, loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; //     || [] added
@@ -61,5 +61,5 @@ function eraseProduct(productId) {
 }
 
 renderCartContents();
-cartCounter();
 setEraser();
+loadHeaderFooter();

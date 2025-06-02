@@ -23,13 +23,13 @@ export function setClick(selector, callback) {
 }
 
 //get parameter from url
-
 export function getParam(param){
   const queryString = window.location.search; //get all the url
   const urlParams = new URLSearchParams(queryString); //convert the url in a object
   const productCode = urlParams.get(param);// get the code of the product
   return productCode;
 }
+
 
 export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
   const htmlStrings = list.map(template);
@@ -39,6 +39,7 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
 
 export function cartCounter(){
   const cartItems = getLocalStorage("so-cart") || [];
@@ -51,5 +52,30 @@ export function cartCounter(){
   else{
     document.querySelector(".cartCounter").style.display = "none";
   }
-  
+}
+
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if(callback){
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter(){
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerElement = document.querySelector("#header-page");
+  renderWithTemplate(headerTemplate, headerElement);
+
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerElement = document.querySelector("#footer-page");
+  renderWithTemplate(footerTemplate, footerElement);
+
+  cartCounter();
 }
