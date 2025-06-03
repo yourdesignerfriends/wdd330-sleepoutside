@@ -1,36 +1,41 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Cart</title>
-
     <link rel="stylesheet" href="/css/style.css" />
-
-    <script src="../js/cart.js" type="module"></script>
   </head>
-
   <body>
     <header class="divider" id="header-page">
-      
     </header>
-
     <main class="divider">
       <section class="products">
         <h2>My Cart</h2>
-
-        <ul class="product-list">
-          <!-- product list added with Javascript -->
-        </ul>
+        <!-- AD- product list added with Javascript -->
+        <ul class="product-list"></ul>
         <div class="cart-footer-hide">
           <p class="cart-total"></p>
         </div>
       </section>
     </main>
-
+    <!-- AD- Template for cart items -->
+    <template id="cart-item-template">
+      <li class='cart-card divider'>
+        <a href='#' class='cart-card__image'>
+          <img src='' alt='' />
+        </a>
+        <a href='#'>
+          <h2 class='card__name'></h2>
+        </a>
+        <p class='cart-card__color'></p>
+        <p class='cart-card__quantity'>
+          <span class="qty"></span> <span class="remove-item" data-id="">X</span>
+        </p>
+        <p class='cart-card__price'></p>
+      </li>
+    </template>
     <footer id="footer-page"></footer>
+    <script src="../js/cart.js" type="module"></script>
   </body>
 </html>
