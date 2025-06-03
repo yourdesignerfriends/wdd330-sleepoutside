@@ -83,4 +83,17 @@ export default class ProductList {
       titleElement.textContent = `Top Products: ${formatted.charAt(0).toUpperCase() + formatted.slice(1)}`;
     }
   }
+
+  sortAndRender(sortBy) {
+    // Store a local copy of the product list
+    this.dataSource.getData(this.category).then((list) => {
+      if (sortBy === "name") {
+        list.sort((a, b) => a.Name.localeCompare(b.Name));
+      } else if (sortBy === "price") {
+        list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+      }
+      this.renderList(list);
+    });
+  }
+  
 }

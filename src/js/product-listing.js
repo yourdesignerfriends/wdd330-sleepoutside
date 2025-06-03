@@ -26,8 +26,12 @@ if (category === "search") {
 
 // Set up the product list
 const element = document.querySelector(".product-list");
-const producList = new ProductList(category, dataSource, element);
-producList.init();
+const productList = new ProductList(category, dataSource, element);
+productList.init();
+document.getElementById("sort").addEventListener("change", (e) => {
+  const sortBy = e.target.value;
+  productList.sortAndRender(sortBy);
+});
 
 
 localStorage.removeItem("searchResults");

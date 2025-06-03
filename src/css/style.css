@@ -372,3 +372,16 @@ footer {
   cursor: pointer;
 }
 
+/* product listing sort styles */
+
+.sort-label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.sort-select {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
