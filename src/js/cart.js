@@ -1,4 +1,9 @@
-import { setLocalStorage, getLocalStorage, cartCounter, loadHeaderFooter } from "./utils.mjs";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  cartCounter,
+  loadHeaderFooter,
+} from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; //     || [] added
@@ -42,7 +47,7 @@ function getCartTotal() {
 }
 // AD- This ensures that each item in the cart can be properly deleted.
 function setEraser() {
-  document.querySelectorAll(".remove-item").forEach(button => {
+  document.querySelectorAll(".remove-item").forEach((button) => {
     button.addEventListener("click", (event) => {
       const productId = event.target.dataset.id;
       eraseProduct(productId);
@@ -51,13 +56,13 @@ function setEraser() {
 }
 // AD- Removes a specific product from the cart and updates the interface to reflect the change.
 function eraseProduct(productId) {
-  let cart = getLocalStorage("so-cart") || [];  
-  cart = cart.filter(item => item.Id !== productId);  
-  setLocalStorage("so-cart", cart);  
+  let cart = getLocalStorage("so-cart") || [];
+  cart = cart.filter((item) => item.Id !== productId);
+  setLocalStorage("so-cart", cart);
 
-  cartCounter();  
-  renderCartContents();  
-  setEraser();  
+  cartCounter();
+  renderCartContents();
+  setEraser();
 }
 
 renderCartContents();

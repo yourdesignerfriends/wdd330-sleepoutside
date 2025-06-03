@@ -341,3 +341,12 @@ footer {
 .remove-item {
   margin-left: 10px;
 }
+
+/* category Icon styles */
+.category {
+  text-align: center;
+}
+.category-icon {
+  width: 60px;
+  margin: 1.5rem 2rem -2.5rem 2rem;
+}
