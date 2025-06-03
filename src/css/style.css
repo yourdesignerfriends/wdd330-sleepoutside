@@ -341,3 +341,17 @@ footer {
 .remove-item {
   margin-left: 10px;
 }
+#searchForm {
+  display: flex;
+  gap: 10px;
+}
+
+#searchForm button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
