@@ -25,7 +25,6 @@ loadHeaderFooter().then(() => {
         try {
             const dataSource = new ProductData("tents"); 
             const products = await dataSource.getData();
-
             const filteredProducts = products.filter(product =>
                 product.Name.toLowerCase().includes(query) ||
                 product.Brand.Name.toLowerCase().includes(query)
