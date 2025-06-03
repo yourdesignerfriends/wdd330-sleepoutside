@@ -218,6 +218,12 @@ button {
   font-weight: 600;
 }
 
+.product-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
 /* End product list card */
 
 .product-detail {
@@ -302,14 +308,15 @@ footer {
 }
 /* AD- Clase para aplicar el descuento */
 .discount-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
   background-color: var(--tertiary-color);
   color: white;
   padding: 4px 8px;
   font-size: var(--small-font);
   font-weight: bold;
   border-radius: 5px;
-  display: inline-block;
-  margin-left: 10px;
 }
 /* AD- Added styles for the remove item class to improve visibility */
 .remove-item {
