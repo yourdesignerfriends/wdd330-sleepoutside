@@ -28,6 +28,17 @@ function productCardTemplate(product) {
   `;
 }
 
+// AD- Retrieve search results from local storage
+const searchResults = JSON.parse(localStorage.getItem("searchResults")) || [];
+
+// AD- Render the search results if available
+const listElement = document.querySelector(".product-list");
+
+if (searchResults.length > 0) {
+  renderListWithTemplate(productCardTemplate, listElement, searchResults);
+}
+
+
 // AD- Class responsible for managing the product list on the page
 export default class ProductList {
   constructor(category, datasSource, listElement) {
