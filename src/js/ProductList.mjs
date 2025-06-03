@@ -2,7 +2,7 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
   // AD- Extract product details for cleaner code
-  const { Id, Image, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
+  const { Id, Images, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
   
   // AD- Initialize discountTag to avoid reference errors
   let discountTag = "";
@@ -18,7 +18,7 @@ function productCardTemplate(product) {
   return `
     <li class="product-card">
       <a href="product_pages/?product=${Id}">
-      <img src="${Image}" alt="${Name}">
+      <img src="${Images.PrimaryMedium}" alt="${Name}">
       <h2>${Brand.Name}</h2>
       <h3>${Name}</h3>
       <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
@@ -41,16 +41,17 @@ if (searchResults.length > 0) {
 
 // AD- Class responsible for managing the product list on the page
 export default class ProductList {
-  constructor(category, datasSource, listElement) {
+  constructor(category, dataSource, listElement) {
     this.category = category;
-    this.datasSource = datasSource;
+    this.dataSource = dataSource;
     this.listElement = listElement;
   }
 
   // AD- Method to initialize product loading
   async init() {
-    const list = await this.datasSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    console.log(list)
   }
 
   // AD- Method that renders the product list on the page
