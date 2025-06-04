@@ -40,10 +40,14 @@ export default class ProductList {
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    this.rendertitle(this.category)
   }
 
   // AD- Method that renders the product list on the page
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+  rendertitle(category){
+    document.querySelector(".title").innerHTML =`Top Products: ${category}`
   }
 }
