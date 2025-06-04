@@ -23,4 +23,4 @@ export default class ProductData {
     console.log(data.Result);
     return data.Result;
   }
-}
+}}
