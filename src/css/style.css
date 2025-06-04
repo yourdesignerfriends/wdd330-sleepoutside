@@ -350,18 +350,3 @@ footer {
   width: 60px;
   margin: 1.5rem 2rem -2.5rem 2rem;
 }
-
-#searchForm {
-  display: flex;
-  gap: 10px;
-}
-
-#searchForm button {
-  padding: 8px 12px;
-  font-size: 16px;
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-

@@ -17,7 +17,7 @@ export default class ShoppingCart {
     this.cartContainer.innerHTML = "";
     this.cartItems.forEach((item) => {
       const clone = this.template.content.cloneNode(true);
-      clone.querySelector(".cart-card__image img").src = item.Image;
+      clone.querySelector(".cart-card__image img").src = item.Images.PrimaryLarge;
       clone.querySelector(".cart-card__image img").alt = item.Name;
       clone.querySelector(".card__name").textContent = item.Name;
       clone.querySelector(".cart-card__color").textContent = item.Colors[0].ColorName;
