@@ -17,7 +17,7 @@ function productCardTemplate(product) {
   // AD- Return the product card structure with the discount indicator if applicable
   return `
     <li class="product-card">
-      <a href="product_pages/?product=${Id}">
+      <a href="../product_pages/?product=${Id}">
       <img src="${Images.PrimaryMedium}" alt="${Name}">
       <h2>${Brand.Name}</h2>
       <h3>${Name}</h3>
@@ -27,17 +27,6 @@ function productCardTemplate(product) {
     </li>
   `;
 }
-
-// AD- Retrieve search results from local storage
-const searchResults = JSON.parse(localStorage.getItem("searchResults")) || [];
-
-// AD- Render the search results if available
-const listElement = document.querySelector(".product-list");
-
-if (searchResults.length > 0) {
-  renderListWithTemplate(productCardTemplate, listElement, searchResults);
-}
-
 
 // AD- Class responsible for managing the product list on the page
 export default class ProductList {
@@ -51,7 +40,6 @@ export default class ProductList {
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list);
-    console.log(list)
   }
 
   // AD- Method that renders the product list on the page

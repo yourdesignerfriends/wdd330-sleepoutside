@@ -1,7 +1,5 @@
-//export th path to get the information of the products
 const baseURL = import.meta.env.VITE_SERVER_URL
-
-
+//export th path to get the information of the products
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -12,7 +10,7 @@ function convertToJson(res) {
 
 export default class ProductData {
   constructor() {
-    
+
   }
   async getData(category) {
   const response = await fetch(`${baseURL}products/search/${category} `);
@@ -25,4 +23,4 @@ export default class ProductData {
     console.log(data.Result);
     return data.Result;
   }
-}
+}}
