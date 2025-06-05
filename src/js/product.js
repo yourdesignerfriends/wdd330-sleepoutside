@@ -8,7 +8,7 @@ const productId = getParam("product");
 const product = new ProductDetails(productId, dataSource);
 product.init();
 
-loadHeaderFooter();
+loadHeaderFooter()
 
 // // add to cart button event handler
 // async function addToCartHandler(e) {
