@@ -76,6 +76,17 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#footer-page");
   renderWithTemplate(footerTemplate, footerElement);
-
   cartCounter();
+}
+
+export function showBreadCrumb(data){
+  const element = document.querySelector(".breacrumb")
+  const queryString = window.location.search; //get all the url
+  const urlParams = new URLSearchParams(queryString); //convert the url in a object
+  if (urlParams.has("category")){
+    element.innerHTML = `<p>Home > Category > ${getParam("category")} ${data} items</p>`;
+  }
+  else if(urlParams.has("product")){
+    element.innerHTML = `<p>Home > Category > ${data}</p>`;
+  }
 }
