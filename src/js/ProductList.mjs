@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, showBreadCrumb} from "./utils.mjs";
 
 function productCardTemplate(product) {
   // AD- Extract product details for cleaner code
@@ -40,7 +40,8 @@ export default class ProductList {
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list);
-    this.rendertitle(this.category)
+    this.rendertitle(this.category);
+    showBreadCrumb(list.length);
   }
 
   // AD- Method that renders the product list on the page
@@ -50,4 +51,10 @@ export default class ProductList {
   rendertitle(category){
     document.querySelector(".title").innerHTML =`Top Products: ${category}`
   }
+  //////////////////////////////////////////
+  // async productCounter(){
+  //   const data = await this.dataSource.getData(this.category);
+  //   const count = data.length
+  //   return count
+  // }
 }

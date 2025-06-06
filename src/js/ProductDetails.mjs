@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, cartCounter } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, cartCounter, showBreadCrumb } from "./utils.mjs";
 
 
 export default class ProductDetails{
@@ -18,13 +18,14 @@ export default class ProductDetails{
         document
         .getElementById('addToCart')
         .addEventListener('click', this.addProductToCart.bind(this));
+        showBreadCrumb(this.product.Category);
     }
 
     addProductToCart() {
         const cart = getLocalStorage("so-cart") || [];
         cart.push(this.product);
         setLocalStorage("so-cart", cart);
-        cartCounter()
+        cartCounter();
 }
 
     renderProductDetails(){
