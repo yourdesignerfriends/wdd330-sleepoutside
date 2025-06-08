@@ -51,10 +51,5 @@ export default class ProductList {
   rendertitle(category){
     document.querySelector(".title").innerHTML =`Top Products: ${category}`
   }
-  //////////////////////////////////////////
-  // async productCounter(){
-  //   const data = await this.dataSource.getData(this.category);
-  //   const count = data.length
-  //   return count
-  // }
+  
 }
