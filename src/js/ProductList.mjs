@@ -36,27 +36,51 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.products = []; // Store the original list of products
   }
 
-  // AD- Method to initialize product loading
   async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
+    this.products = await this.dataSource.getData(this.category);
+    this.renderList(this.products);
     this.rendertitle(this.category);
-    showBreadCrumb(list.length);
+    showBreadCrumb(this.products.length);
+    this.initSortControls(); // Initialize sorting controls
   }
 
-  // AD- Method that renders the product list on the page
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
+
   rendertitle(category){
-    document.querySelector(".title").innerHTML =`Top Products: ${category}`
+    document.querySelector(".title").innerHTML =`Top Products: ${category}`;
   }
-  //////////////////////////////////////////
-  // async productCounter(){
-  //   const data = await this.dataSource.getData(this.category);
-  //   const count = data.length
-  //   return count
-  // }
+
+  initSortControls() {
+    const sortByElement = document.getElementById("sort-by");
+    if (sortByElement) {
+      sortByElement.addEventListener("change", (event) => {
+        this.sortProducts(event.target.value);
+      });
+    }
+  }
+
+  sortProducts(sortByValue) {
+    let sortedList = [...this.products]; // Create a copy to sort
+
+    switch (sortByValue) {
+      case "name-asc":
+        sortedList.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case "name-desc":
+        sortedList.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case "price-asc":
+        sortedList.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        break;
+      case "price-desc":
+        sortedList.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        break;
+    }
+    this.renderList(sortedList);
+  }
 }
