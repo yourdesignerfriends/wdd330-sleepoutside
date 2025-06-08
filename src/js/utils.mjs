@@ -39,13 +39,13 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
-//AD- 
+
+
 export function cartCounter(){
   const cartItems = getLocalStorage("so-cart") || [];
   let count = 0;
   if(cartItems.length > 0){
-    // AD- Delete this: cartItems.forEach(item => count++);
-    count = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    cartItems.forEach(item => count++);
     document.querySelector(".cartCounter").style.display = "block";
     document.querySelector(".cartCounter").innerHTML = count;
   }
