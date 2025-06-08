@@ -232,40 +232,196 @@ button {
 
 /* Start cart list card styles */
 .cart-card {
-  display: grid;
-  grid-template-columns: 25% auto 15%;
-  font-size: var(--small-font);
-  /* max-height: 120px; */
-  align-items: center;
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 1.5rem; /* Increased margin for better separation */
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
 }
 
 .cart-card__image {
-  grid-row: 1/3;
-  grid-column: 1;
+  margin-right: 1rem;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
-.cart-card p {
-  margin-top: 0;
+.cart-card__image img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.cart-card__details {
+  display: flex;
+  flex-direction: column; /* Stack details vertically */
+  flex-grow: 1; /* Allow details to take available space */
 }
 
 .cart-card .card__name {
-  grid-row: 1;
-  grid-column: 2;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  /* text-align: left; /* Ensure it's aligned to start if not by default */
 }
 
 .cart-card__color {
-  grid-row: 2;
-  grid-column: 2;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.75rem; /* More space before quantity controls */
+  /* text-align: left; /* Ensure it's aligned to start if not by default */
 }
 
-.cart-card__quantity {
-  grid-row: 1;
-  grid-column: 3;
+.cart-card__quantity-controls {
+  display: flex;
+  align-items: center;
+  /* No margin-right needed here as price is separate */
+}
+
+.quantity-btn,
+.remove-item {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.3em 0.6em;
+  margin: 0 0.3em;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Order of buttons: remove/minus, quantity, plus */
+.cart-card__quantity-controls .remove-item,
+.cart-card__quantity-controls .minus {
+    order: 1;
+}
+.cart-card__quantity-controls .qty {
+    order: 2;
+    padding: 0 0.5em;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+.cart-card__quantity-controls .plus {
+    order: 3;
+}
+
+
+.quantity-btn:hover,
+.remove-item:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
 }
 
 .cart-card__price {
-  grid-row: 2;
-  grid-column: 3;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 1rem; /* Add some space between details and price */
+  text-align: right; /* Align price to the right */
+  min-width: 80px; /* Give price some minimum space */
+}
+
+/* Ensure the main product list has some padding if needed */
+.product-list {
+  display: flex;
+  flex-flow: row wrap; /* or column if you want a single column list */
+  list-style-type: none;
+  justify-content: flex-start; /* This aligns items to the start */
+  padding-left: 0; /* Remove default ul padding */
+  /* Remove any margin: auto; if present that might center it */
+  margin-left: 0; 
+  margin-right: auto; /* This can help ensure it's pushed to the left */
+}
+
+.cart-card {
+  display: flex;
+  align-items: flex-start; /* This aligns items within the card to the top-left */
+  margin-bottom: 1.5rem; 
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  width: 100%; /* Ensure cart cards take full width of their list item container */
+}
+
+.cart-card__details {
+  display: flex;
+  flex-direction: column; 
+  flex-grow: 1; 
+  align-items: flex-start; /* Explicitly align items in details to the start */
+}
+
+.cart-card .card__name {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  /* text-align: left; /* Ensure it's aligned to start if not by default */
+}
+
+.cart-card__color {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.75rem; /* More space before quantity controls */
+  /* text-align: left; /* Ensure it's aligned to start if not by default */
+}
+
+.cart-card__quantity-controls {
+  display: flex;
+  align-items: center;
+  /* No margin-right needed here as price is separate */
+}
+
+.quantity-btn,
+.remove-item {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.3em 0.6em;
+  margin: 0 0.3em;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Order of buttons: remove/minus, quantity, plus */
+.cart-card__quantity-controls .remove-item,
+.cart-card__quantity-controls .minus {
+    order: 1;
+}
+.cart-card__quantity-controls .qty {
+    order: 2;
+    padding: 0 0.5em;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+.cart-card__quantity-controls .plus {
+    order: 3;
+}
+
+
+.quantity-btn:hover,
+.remove-item:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.cart-card__price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 1rem; /* Add some space between details and price */
+  text-align: right; /* Align price to the right */
+  min-width: 80px; /* Give price some minimum space */
+}
+
+/* Ensure the main product list has some padding if needed */
+.product-list {
+  padding-left: 0; /* Remove default ul padding if any */
+  list-style: none; /* Remove default list bullets */
 }
 
 @media screen and (min-width: 500px) {
@@ -349,4 +505,14 @@ footer {
 .category-icon {
   width: 60px;
   margin: 1.5rem 2rem -2.5rem 2rem;
+}
+.remove-item {
+  background-color: #f8d7da; /* Light red for remove, for distinction */
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.remove-item:hover {
+  background-color: #f1c1c5;
+  border-color: #eba5ad;
 }
