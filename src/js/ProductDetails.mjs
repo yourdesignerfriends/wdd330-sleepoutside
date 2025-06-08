@@ -1,6 +1,5 @@
 import { getLocalStorage, setLocalStorage, cartCounter, showBreadCrumb } from "./utils.mjs";
 
-
 export default class ProductDetails{
     constructor(productId, dataSource){
         this.productId = productId;
@@ -20,13 +19,25 @@ export default class ProductDetails{
         .addEventListener('click', this.addProductToCart.bind(this));
         showBreadCrumb(this.product.Category);
     }
-
     addProductToCart() {
         const cart = getLocalStorage("so-cart") || [];
-        cart.push(this.product);
+        //AD- Check if product already exists in cart
+        const existingProductIndex = cart.findIndex(item => item.Id === this.product.Id);
+        if (existingProductIndex >= 0) {
+            // If product exists, increment quantity
+            if (!cart[existingProductIndex].quantity) {
+                cart[existingProductIndex].quantity = 1;
+            }
+            cart[existingProductIndex].quantity++;
+        } else {
+            // If product doesn't exist, add it with quantity 1
+            this.product.quantity = 1;
+            cart.push(this.product);
+        }
+         
         setLocalStorage("so-cart", cart);
         cartCounter();
-}
+    }
 
     renderProductDetails(){
         productDetailsTemplate(this.product);
