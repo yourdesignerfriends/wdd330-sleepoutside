@@ -2,7 +2,8 @@ import { renderListWithTemplate, showBreadCrumb} from "./utils.mjs";
 
 function productCardTemplate(product) {
   // AD- Extract product details for cleaner code
-  const { Id, Images, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
+  // add responsiveImage and delete imagen
+  const { Id, responsiveImage, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
   
   // AD- Initialize discountTag to avoid reference errors
   let discountTag = "";
@@ -15,14 +16,15 @@ function productCardTemplate(product) {
     discountTag = `<span class="discount-badge">-${Math.round(discountPercentage)}% OFF</span>`;
   }
   // AD- Return the product card structure with the discount indicator if applicable
+  // I change this <img src="${Images.PrimaryMedium}" alt="${Name}"> for this: <img src="${responsiveImage}" alt="${Name}">
   return `
     <li class="product-card">
       <a href="../product_pages/?product=${Id}">
-      <img src="${Images.PrimaryMedium}" alt="${Name}">
+      <img src="${responsiveImage}" alt="${Name}">
       <h2>${Brand.Name}</h2>
       <h3>${Name}</h3>
       <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
-      ${discountTag} <!-- Agregamos el indicador de descuento -->
+      ${discountTag} <!-- AD- add discount tag -->
       </a>
     </li>
   `;
