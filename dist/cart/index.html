@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Cart</title>
-    <script type="module" crossorigin src="/assets/cart-COO-SorQ.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/utils-DI4muboU.js">
-    <link rel="stylesheet" crossorigin href="/assets/utils-BgqRSyim.css">
+    <title>Sleep Outside | Cart</title>
+    <script type="module" crossorigin src="/assets/cart-BcsCBftL.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/utils-m4cwa3RX.js">
+    <link rel="stylesheet" crossorigin href="/assets/utils-DdscQGWx.css">
   </head>
   <body>
     <header class="divider" id="header-page">
@@ -27,16 +27,21 @@
         <a href='#' class='cart-card__image'>
           <img src='' alt='' />
         </a>
-        <a href='#'>
-          <h2 class='card__name'></h2>
-        </a>
-        <p class='cart-card__color'></p>
-        <p class='cart-card__quantity'>
-          <span class="qty"></span> <span class="remove-item" data-id="">X</span>
-        </p>
+        <div class="cart-card__details">
+          <a href='#'>
+            <h2 class='card__name'></h2>
+          </a>
+          <p class='cart-card__color'></p>
+          <div class='cart-card__quantity-controls'>
+            <button class="quantity-btn minus" data-id="" style="display: none;">➖</button>
+            <button class="remove-item" data-id="">🗑️</button>
+            <span class="qty"></span>
+            <button class="quantity-btn plus" data-id="">➕</button>
+          </div>
+        </div>
         <p class='cart-card__price'></p>
       </li>
     </template>
-    <footer id="footer-page"></footer>
+    <footer id="footer-page"></footer>
   </body>
 </html>

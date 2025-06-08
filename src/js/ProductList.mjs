@@ -1,62 +1,58 @@
-import { renderListWithTemplate, showBreadCrumb} from "./utils.mjs";
+import { renderListWithTemplate, showBreadCrumb } from "./utils.mjs";
 
 function productCardTemplate(product) {
-  // AD- Extract product details for cleaner code
-  // add responsiveImage and delete imagen
   const { Id, responsiveImage, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
-  
-  // AD- Initialize discountTag to avoid reference errors
+
   let discountTag = "";
-  
-  // AD- Check if the product is discounted
   if (FinalPrice < SuggestedRetailPrice) {
-    // AD- Calculate the discount percentage dynamically
     const discountPercentage = ((SuggestedRetailPrice - FinalPrice) / SuggestedRetailPrice) * 100;
-    // AD- Create an HTML tag displaying the discount percentage
     discountTag = `<span class="discount-badge">-${Math.round(discountPercentage)}% OFF</span>`;
   }
-  // AD- Return the product card structure with the discount indicator if applicable
-  // I change this <img src="${Images.PrimaryMedium}" alt="${Name}"> for this: <img src="${responsiveImage}" alt="${Name}">
+
   return `
     <li class="product-card">
       <a href="../product_pages/?product=${Id}">
-      <img src="${responsiveImage}" alt="${Name}">
-      <h2>${Brand.Name}</h2>
-      <h3>${Name}</h3>
-      <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
-      ${discountTag} <!-- AD- add discount tag -->
+        <img src="${responsiveImage}" alt="${Name}">
+        <h2>${Brand.Name}</h2>
+        <h3>${Name}</h3>
+        <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
+        ${discountTag}
       </a>
     </li>
   `;
 }
 
-// AD- Class responsible for managing the product list on the page
 export default class ProductList {
   constructor(category, dataSource, listElement) {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.list = []; // ✅ store the list for sorting
   }
 
-  // AD- Method to initialize product loading
   async init() {
     const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
+    this.list = list; // ✅ save to use later for sorting
+    this.renderList(this.list);
     this.rendertitle(this.category);
     showBreadCrumb(list.length);
   }
 
-  // AD- Method that renders the product list on the page
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
-  rendertitle(category){
-    document.querySelector(".title").innerHTML =`Top Products: ${category}`
+
+  rendertitle(category) {
+    document.querySelector(".title").innerHTML = `Top Products: ${category}`;
   }
-  //////////////////////////////////////////
-  // async productCounter(){
-  //   const data = await this.dataSource.getData(this.category);
-  //   const count = data.length
-  //   return count
-  // }
+
+  // ✅ Sorting method
+  sortProducts(criteria) {
+    if (criteria === "name") {
+      this.list.sort((a, b) => a.Name.localeCompare(b.Name));
+    } else if (criteria === "price") {
+      this.list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    }
+    this.renderList(this.list);
+  }
 }
