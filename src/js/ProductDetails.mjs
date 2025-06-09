@@ -1,86 +1,67 @@
-import { renderListWithTemplate, showBreadCrumb} from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, cartCounter, showBreadCrumb } from "./utils.mjs";
 
-function productCardTemplate(product) {
-  // AD- Extract product details for cleaner code
-  // add responsiveImage and delete imagen
-  const { Id, responsiveImage, Name, Brand, FinalPrice, SuggestedRetailPrice } = product;
-  
-  // AD- Initialize discountTag to avoid reference errors
-  let discountTag = "";
-  
-  // AD- Check if the product is discounted
-  if (FinalPrice < SuggestedRetailPrice) {
-    // AD- Calculate the discount percentage dynamically
-    const discountPercentage = ((SuggestedRetailPrice - FinalPrice) / SuggestedRetailPrice) * 100;
-    // AD- Create an HTML tag displaying the discount percentage
-    discountTag = `<span class="discount-badge">-${Math.round(discountPercentage)}% OFF</span>`;
-  }
-  // AD- Return the product card structure with the discount indicator if applicable
-  // I change this <img src="${Images.PrimaryMedium}" alt="${Name}"> for this: <img src="${responsiveImage}" alt="${Name}">
-  return `
-    <li class="product-card">
-      <a href="../product_pages/?product=${Id}">
-      <img src="${responsiveImage}" alt="${Name}">
-      <h2>${Brand.Name}</h2>
-      <h3>${Name}</h3>
-      <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
-      ${discountTag} <!-- AD- add discount tag -->
-      </a>
-    </li>
-  `;
+export default class ProductDetails{
+    constructor(productId, dataSource){
+        this.productId = productId;
+        this.dataSource = dataSource;
+        this.product = {};
+    }
+    
+    async init(){
+        // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+        this.product = await this.dataSource.findProductById(this.productId)
+        // the product details are needed before rendering the HTML
+        this.renderProductDetails();
+        // once the HTML is rendered, add a listener to the Add to Cart button
+        // Notice the .bind(this). This callback will not work if the bind(this) is missing. Review the readings from this week on 'this' to understand why.
+        document
+        .getElementById('addToCart')
+        .addEventListener('click', this.addProductToCart.bind(this));
+        showBreadCrumb(this.product.Category);
+    }
+    addProductToCart() {
+        const cart = getLocalStorage("so-cart") || [];
+        //AD- Check if product already exists in cart
+        const existingProductIndex = cart.findIndex(item => item.Id === this.product.Id);
+        if (existingProductIndex >= 0) {
+            // If product exists, increment quantity
+            if (!cart[existingProductIndex].quantity) {
+                cart[existingProductIndex].quantity = 1;
+            }
+            cart[existingProductIndex].quantity++;
+        } else {
+            // If product doesn't exist, add it with quantity 1
+            this.product.quantity = 1;
+            cart.push(this.product);
+        }
+         
+        setLocalStorage("so-cart", cart);
+        cartCounter();
+    }
+
+    renderProductDetails(){
+        productDetailsTemplate(this.product);
+
+    }
 }
 
-// AD- Class responsible for managing the product list on the page
-export default class ProductList {
-  constructor(category, dataSource, listElement) {
-    this.category = category;
-    this.dataSource = dataSource;
-    this.listElement = listElement;
-    this.products = []; // Store the original list of products
-  }
+function productDetailsTemplate(product) {
+  document.querySelector('h2').textContent = product.Brand.Name;
+  document.querySelector('h3').textContent = product.NameWithoutBrand;
 
-  async init() {
-    this.products = await this.dataSource.getData(this.category);
-    this.renderList(this.products);
-    this.rendertitle(this.category);
-    showBreadCrumb(this.products.length);
-    this.initSortControls(); // Initialize sorting controls
-  }
+  const productImage = document.getElementById('productImage');
+  productImage.src = product.Images.PrimaryLarge;
+  productImage.alt = product.NameWithoutBrand;
 
-  renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
-  }
+  document.getElementById('productRetailPrice').textContent = `Suggested Retail Price: ${product.SuggestedRetailPrice.toFixed(2)}`;
+  document.getElementById('discount').textContent = `Discount: ${makeDiscount(product.SuggestedRetailPrice, product.FinalPrice).toFixed(2)}`
+  document.getElementById('productPrice').textContent = `Final Price: ${product.FinalPrice}`;
+  
+  document.getElementById('productColor').textContent = product.Colors[0].ColorName;
+  document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
 
-  rendertitle(category){
-    document.querySelector(".title").innerHTML =`Top Products: ${category}`;
-  }
-
-  initSortControls() {
-    const sortByElement = document.getElementById("sort-by");
-    if (sortByElement) {
-      sortByElement.addEventListener("change", (event) => {
-        this.sortProducts(event.target.value);
-      });
-    }
-  }
-
-  sortProducts(sortByValue) {
-    let sortedList = [...this.products]; // Create a copy to sort
-
-    switch (sortByValue) {
-      case "name-asc":
-        sortedList.sort((a, b) => a.Name.localeCompare(b.Name));
-        break;
-      case "name-desc":
-        sortedList.sort((a, b) => b.Name.localeCompare(a.Name));
-        break;
-      case "price-asc":
-        sortedList.sort((a, b) => a.FinalPrice - b.FinalPrice);
-        break;
-      case "price-desc":
-        sortedList.sort((a, b) => b.FinalPrice - a.FinalPrice);
-        break;
-    }
-    this.renderList(sortedList);
-  }
+  document.getElementById('addToCart').dataset.id = product.Id;
+}
+function makeDiscount(retailPrice, finalPrice){
+    return retailPrice - finalPrice
 }
