@@ -1,4 +1,5 @@
 import { getLocalStorage } from './utils.mjs';
+import ExternalServices from './ExternalServices.mjs';
 
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
@@ -9,6 +10,7 @@ export default class CheckoutProcess {
     this.shipping = 0;
     this.tax = 0;
     this.orderTotal = 0;
+    this.externalServices = new ExternalServices();
   }
 
   init() {
@@ -58,5 +60,81 @@ export default class CheckoutProcess {
     if (tax) tax.textContent = `$${this.tax.toFixed(2)}`;
     if (shipping) shipping.textContent = `$${this.shipping.toFixed(2)}`;
     if (orderTotal) orderTotal.textContent = `$${this.orderTotal.toFixed(2)}`;
+  }
+
+  packageItems(items) {
+    return items.map(item => ({
+      id: item.Id,
+      name: item.Name,
+      price: item.FinalPrice,
+      quantity: item.quantity || 1
+    }));
+  }
+
+  formDataToJSON(formElement) {
+    const formData = new FormData(formElement);
+    const convertedJSON = {};
+
+    formData.forEach((value, key) => {
+      convertedJSON[key] = value;
+    });
+
+    return convertedJSON;
+  }
+
+  async checkout(form) {
+    const formData = this.formDataToJSON(form);
+    console.log('Form data:', formData);
+    
+    const order = {
+      orderDate: new Date().toISOString(),
+      fname: formData.firstName,
+      lname: formData.lastName,
+      street: formData.street,
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+      cardNumber: formData.cardNumber,
+      expiration: formData.expiration,
+      code: formData.code,
+      items: this.packageItems(this.list),
+      orderTotal: this.orderTotal.toFixed(2),
+      shipping: this.shipping,
+      tax: this.tax.toFixed(2)
+    };
+
+    // Ensure the order object matches the required format exactly
+    const formattedOrder = {
+      orderDate: order.orderDate,
+      fname: order.fname,
+      lname: order.lname,
+      street: order.street,
+      city: order.city,
+      state: order.state,
+      zip: order.zip,
+      cardNumber: order.cardNumber,
+      expiration: order.expiration,
+      code: order.code,
+      items: order.items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity
+      })),
+      orderTotal: order.orderTotal,
+      shipping: order.shipping,
+      tax: order.tax
+    };
+
+    console.log('Formatted order:', formattedOrder);
+
+    try {
+      const response = await this.externalServices.submitOrder(formattedOrder);
+      console.log('Server response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      throw error;
+    }
   }
 }
