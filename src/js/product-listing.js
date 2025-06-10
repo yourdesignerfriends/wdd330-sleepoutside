@@ -10,6 +10,5 @@ const element = document.querySelector(".product-list");
 const producList = new ProductList(category, dataSource, element);
 producList.init();
 
-
 const alert = new Alert("/json/alerts.json");
 alert.showAlerts();
