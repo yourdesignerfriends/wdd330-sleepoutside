@@ -8,8 +8,10 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
-  constructor() {}
+export default class ExternalServices {
+  constructor() {
+    this.baseURL = 'https://wdd330-backend.onrender.com';
+  }
   // AD- Modify getData(category) to apply getResponsiveImage(product.Images) to each product before returning them.
   async getData(category) {
     const url = `${baseURL}products/search/${category}`;
@@ -33,6 +35,28 @@ export default class ProductData {
     const data = await convertToJson(response);
     return data.Result;
   }
+
+    // NEW METHOD: Submit order to server (POST request)
+    async submitOrder(order) {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+      };
+
+      try {
+        const response = await fetch(`${this.baseURL}/checkout`, options);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return await response.json();
+      } catch (error) {
+        console.error('Error submitting order:', error);
+        throw error;
+      }
+    }
 }
 
 // AD- Function to determine the appropriate image size based on screen width

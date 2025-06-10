@@ -16,7 +16,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Add form validation
   const form = document.getElementById('checkout-form');
   if (form) {
-    form.addEventListener('submit', validateForm);
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      console.log('Form submitted'); // Debug log
+      
+      // Get all required inputs
+      const inputs = document.querySelectorAll('input[required]');
+      let isValid = true;
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.classList.add('error');
+        } else {
+          input.classList.remove('error');
+        }
+      });
+
+      if (isValid) {
+        try {
+          console.log('Form is valid, submitting...'); // Debug log
+          const response = await checkoutProcess.checkout(form);
+          console.log('Order response:', response); // Debug log
+          alert('Order placed successfully!');
+          localStorage.removeItem('so-cart');
+          window.location.href = '/index.html';
+        } catch (error) {
+          console.error('Checkout error:', error); // Debug log
+          alert('There was an error processing your order. Please try again.');
+        }
+      }
+    });
   }
 
   // Add zip code change listener
@@ -27,32 +57,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 });
-
-function validateForm(event) {
-  event.preventDefault();
-  
-  // Get all required inputs
-  const inputs = document.querySelectorAll('input[required]');
-  let isValid = true;
-
-  // Check if all required fields are filled
-  inputs.forEach(input => {
-    if (!input.value.trim()) {
-      isValid = false;
-      input.classList.add('error');
-    } else {
-      input.classList.remove('error');
-    }
-  });
-
-  if (isValid) {
-    // In a real application, you would send this data to your server
-    alert('Order placed successfully!');
-    // Clear the cart
-    localStorage.removeItem('so-cart');
-    // Redirect to home page
-    window.location.href = '/index.html';
-  }
-
-  return false;
-}
