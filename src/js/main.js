@@ -5,3 +5,5 @@ loadHeaderFooter();
 
 const alert = new Alert("/json/alerts.json");
 alert.showAlerts();
+
+setupNewsletterForm();
