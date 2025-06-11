@@ -26,6 +26,8 @@ function productCardTemplate(product) {
       <p class="product-card__price">$${FinalPrice.toFixed(2)}</p>
       ${discountTag} <!-- AD- add discount tag -->
       </a>
+      <button class ="quickView-button" id="quickView-button-${Id}" >Quick View</button>
+      <dialog class="quickWiew-${Id}"></dialog>
     </li>
   `;
 }
@@ -49,6 +51,8 @@ export default class ProductList {
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+    this.showDialog(list)
+    
   }
 
   rendertitle(category){
@@ -81,6 +85,31 @@ export default class ProductList {
         sortedList.sort((a, b) => b.FinalPrice - a.FinalPrice);
         break;
     }
+    while(this.listElement.hasChildNodes()){
+      this.listElement.removeChild(this.listElement.firstChild);
+    }
     this.renderList(sortedList);
   }
+
+  showDialog(list){
+    list.forEach((element)=>{
+      const dialog = document.querySelector("dialog")
+      const dialogButton = document.getElementById(`quickView-button-${element.Id}`);
+      dialogButton.addEventListener("click",()=>{renderDialog(dialog, element)});
+    });
+  }
+}
+
+function renderDialog(dialog, element){
+  dialog.innerHTML = `
+    <div>
+    <p>${element.Name}</p>
+    <img class="dialog-img" src="${element.Images.PrimaryMedium}" alt="${element.Name}">
+    <p>${element.DescriptionHtmlSimple}</p>
+    <button class="closeDialog">Close</button>
+    </div>
+    `
+    document.querySelector(".closeDialog").addEventListener('click', ()=> {dialog.close()});
+    dialog.showModal();
+    console.log(element)
 }

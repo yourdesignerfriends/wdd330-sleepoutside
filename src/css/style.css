@@ -99,7 +99,7 @@ p {
   color: var(--tertiary-color);
 }
 
-button {
+#addToCart{
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -717,6 +717,7 @@ footer {
   font-weight: bold;
 }
 
+
 .modal {
   position: fixed;
   top: 0;
@@ -760,4 +761,46 @@ footer {
   color: white;
   border-radius: 5px;
   text-decoration: none;
+  
+.quickView-button{
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  border: 0;
+  font-size: var(--font-base);
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+dialog{ 
+    margin: auto;
+    padding: 1.5rem 4rem;
+    text-align: start;
+    border-width: 1px;
+    max-width: 40rem;
+}
+dialog div{
+  display: grid;
+  place-items: center;
+  
+}
+dialog p{
+  text-align: center;
+}
+
+::backdrop {
+    background-color: rgba(2, 27, 187, 0.277);;
+ }
+ .closeDialog{
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  border: 0;
+  font-size: var(--font-base);
+  font-weight: bold;
+  cursor: pointer;
 }
