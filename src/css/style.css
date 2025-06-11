@@ -99,7 +99,7 @@ p {
   color: var(--tertiary-color);
 }
 
-#addToCart{
+#addToCart {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -286,7 +286,9 @@ p {
   border-radius: 4px;
   font-size: 1.1rem;
   line-height: 1;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   min-width: 30px;
   text-align: center;
 }
@@ -294,20 +296,19 @@ p {
 /* Order of buttons: remove/minus, quantity, plus */
 .cart-card__quantity-controls .remove-item,
 .cart-card__quantity-controls .minus {
-    order: 1;
+  order: 1;
 }
 .cart-card__quantity-controls .qty {
-    order: 2;
-    padding: 0 0.5em;
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
-    font-size: 1rem;
+  order: 2;
+  padding: 0 0.5em;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  font-size: 1rem;
 }
 .cart-card__quantity-controls .plus {
-    order: 3;
+  order: 3;
 }
-
 
 .quantity-btn:hover,
 .remove-item:hover {
@@ -331,14 +332,14 @@ p {
   justify-content: flex-start; /* This aligns items to the start */
   padding-left: 0; /* Remove default ul padding */
   /* Remove any margin: auto; if present that might center it */
-  margin-left: 0; 
+  margin-left: 0;
   margin-right: auto; /* This can help ensure it's pushed to the left */
 }
 
 .cart-card {
   display: flex;
   align-items: flex-start; /* This aligns items within the card to the top-left */
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #eee;
   width: 100%; /* Ensure cart cards take full width of their list item container */
@@ -346,8 +347,8 @@ p {
 
 .cart-card__details {
   display: flex;
-  flex-direction: column; 
-  flex-grow: 1; 
+  flex-direction: column;
+  flex-grow: 1;
   align-items: flex-start; /* Explicitly align items in details to the start */
 }
 
@@ -381,7 +382,9 @@ p {
   border-radius: 4px;
   font-size: 1.1rem;
   line-height: 1;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   min-width: 30px;
   text-align: center;
 }
@@ -389,20 +392,19 @@ p {
 /* Order of buttons: remove/minus, quantity, plus */
 .cart-card__quantity-controls .remove-item,
 .cart-card__quantity-controls .minus {
-    order: 1;
+  order: 1;
 }
 .cart-card__quantity-controls .qty {
-    order: 2;
-    padding: 0 0.5em;
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
-    font-size: 1rem;
+  order: 2;
+  padding: 0 0.5em;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  font-size: 1rem;
 }
 .cart-card__quantity-controls .plus {
-    order: 3;
+  order: 3;
 }
-
 
 .quantity-btn:hover,
 .remove-item:hover {
@@ -656,7 +658,7 @@ footer {
     padding: 1rem;
     gap: 1.5rem;
   }
-  
+
   .name-group {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -761,7 +763,7 @@ footer {
   border-radius: 5px;
   text-decoration: none;
 }
-.quickView-button{
+.quickView-button {
   padding: 4px 8px;
   border-radius: 5px;
   background-color: green;
@@ -774,26 +776,25 @@ footer {
   margin-left: 10px;
 }
 
-dialog{ 
-    margin: auto;
-    padding: 1.5rem 4rem;
-    text-align: start;
-    border-width: 1px;
-    max-width: 40rem;
+dialog {
+  margin: auto;
+  padding: 1.5rem 4rem;
+  text-align: start;
+  border-width: 1px;
+  max-width: 40rem;
 }
-dialog div{
+dialog div {
   display: grid;
   place-items: center;
-  
 }
-dialog p{
+dialog p {
   text-align: center;
 }
 
 ::backdrop {
-    background-color: rgba(2, 27, 187, 0.277);;
- }
- .closeDialog{
+  background-color: rgba(2, 27, 187, 0.277);
+}
+.closeDialog {
   padding: 4px 8px;
   border-radius: 5px;
   background-color: green;

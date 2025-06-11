@@ -1,28 +1,109 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Checkout</title>
-
-    <script type="module" crossorigin src="/assets/checkout-CGHcnk7a.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/utils-99_6XphS.js">
-    <link rel="stylesheet" crossorigin href="/assets/utils-D6OdtaXL.css">
+    <script type="module" crossorigin src="/assets/checkout-B7HUw56F.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/utils-DMieFbBx.js">
+    <link rel="modulepreload" crossorigin href="/assets/ExternalServices-DOlvdLJr.js">
+    <link rel="stylesheet" crossorigin href="/assets/utils-BMI8k57I.css">
   </head>
-
   <body>
-    <header class="divider" id="header-page">
-    </header>
+    <header class="divider" id="header-page"></header>
 
     <main class="divider">
-      <section class="products">
-        <h2>Review & Place your Order</h2>
-      </section>
+      <div class="checkout-container">
+        <div class="checkout-form">
+          <h2>Checkout Information</h2>
+          <form id="checkout-form">
+            <div class="form-group">
+              <h3>Personal Information</h3>
+              <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h3>Address Information</h3>
+              <div class="form-group">
+                <label for="street">Street Address:</label>
+                <input type="text" id="street" name="street" required />
+              </div>
+              <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+              <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required />
+              </div>
+              <div class="form-group">
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" name="zip" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h3>Payment Information</h3>
+              <div class="form-group">
+                <label for="cardNumber">Card Number:</label>
+                <input
+                  type="text"
+                  id="cardNumber"
+                  name="cardNumber"
+                  required
+                  value="1234123412341234"
+                />
+              </div>
+              <div class="form-group">
+                <label for="expiration">Expiration Date:</label>
+                <input
+                  type="text"
+                  id="expiration"
+                  name="expiration"
+                  required
+                  value="12/25"
+                />
+              </div>
+              <div class="form-group">
+                <label for="code">Security Code:</label>
+                <input type="text" id="code" name="code" required value="123" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Place Order</button>
+          </form>
+        </div>
+
+        <div class="order-summary">
+          <h2>Order Summary</h2>
+          <div class="summary-item">
+            <span>Subtotal:</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="summary-item">
+            <span>Tax (6%):</span>
+            <span id="tax">$0.00</span>
+          </div>
+          <div class="summary-item">
+            <span>Shipping:</span>
+            <span id="shipping">$0.00</span>
+          </div>
+          <div class="summary-item summary-total">
+            <span>Order Total:</span>
+            <span id="order-total">$0.00</span>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer id="footer-page"></footer>
+
   </body>
 </html>

@@ -1,8 +1,8 @@
 import Alert from "./Alert.js";
-import {loadHeaderFooter, getParam} from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
-loadHeaderFooter()
+loadHeaderFooter();
 
 const category = getParam("category");
 const dataSource = new ExternalServices();

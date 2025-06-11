@@ -1,5 +1,5 @@
 import Alert from "./Alert.js";
-import {loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 import setupCTAModal from "./cta-modal.js";
 
 loadHeaderFooter();
